@@ -11,11 +11,21 @@
         </id>
         <discriminator column="id" insert="false"/>
 
-        <property name="tag" type="java.lang.String" column="uuid" length="255" unique="true"/>
+        <property name="name" type="java.lang.String" not-null="true" length="50"/>
+
+        <property name="description" type="java.lang.String" length="255" />
 
         <many-to-one name="creator" class="org.openmrs.User" not-null="true" column="creator"/>
 
         <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true" length="19"/>
+
+        <many-to-one name="retiredBy" class="org.openmrs.User" column="retired_by" />
+
+        <property name="dateRetired" type="java.util.Date" column="date_retired" length="19" />
+
+        <property name="retireReason" type="java.lang.String" column="retire_reason" length="255" />
+
+        <property name="retired" type="boolean" length="1" not-null="true" />
 
         <property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true"/>
     </class>
