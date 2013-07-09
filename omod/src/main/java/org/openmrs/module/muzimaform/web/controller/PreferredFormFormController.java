@@ -20,17 +20,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The main controller.
  */
 @Controller
-public class  MuzimaPreferredFormManageController {
-	
-	protected final Log log = LogFactory.getLog(getClass());
-	
-	@RequestMapping(value = "/module/muzimaform/manage", method = RequestMethod.GET)
-	public void manage(ModelMap model) {
-		model.addAttribute("user", Context.getAuthenticatedUser());
-	}
+@RequestMapping(value = "/module/muzimapreferredform/preferredforms.list")
+public class PreferredFormFormController {
+
+    private final Log log = LogFactory.getLog(getClass());
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET)
+    public Map<String, Object> view(final @RequestParam(value = "search") String search,
+                     final @RequestParam(value = "pageNumber") Integer pageNumber,
+                     final @RequestParam(value = "pageSize") Integer pageSize) {
+
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("pages", 0);
+        response.put("objects", new ArrayList<Object>());
+        return response;
+    }
 }

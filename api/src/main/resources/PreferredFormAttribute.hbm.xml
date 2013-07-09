@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="org.openmrs.module.muzimaform">
 
-	<class name="PreferredForm" table="${project.parent.artifactId}_preferred_form">
+	<class name="PreferredFormAttribute" table="${project.parent.artifactId}_preferred_form_attribute">
 		<id name="id" type="int" column="id" unsaved-value="0">
 			<generator class="native" />
 		</id>
