@@ -16,12 +16,12 @@ package org.openmrs.module.muzimaform.web.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,19 +29,20 @@ import java.util.Map;
  * The main controller.
  */
 @Controller
-@RequestMapping(value = "/module/muzimapreferredform/preferredform.form")
-public class PreferredFormListController {
+@RequestMapping(value = "/module/muzimapreferredform/preferredforms.list")
+public class PreferredFormTagsController {
 
     private final Log log = LogFactory.getLog(getClass());
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
-    public Map<String, Object> view(final @RequestParam(value = "uuid") String uuid) {
-        Map<String, Object> response = new HashMap<String, Object>();
-        return response;
-    }
+    public Map<String, Object> view(final @RequestParam(value = "search") String search,
+                                    final @RequestParam(value = "pageNumber") Integer pageNumber,
+                                    final @RequestParam(value = "pageSize") Integer pageSize) {
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void save(final @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("pages", 0);
+        response.put("objects", new ArrayList<Object>());
+        return response;
     }
 }

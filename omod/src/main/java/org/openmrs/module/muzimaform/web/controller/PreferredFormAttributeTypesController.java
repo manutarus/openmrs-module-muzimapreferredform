@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/module/muzimapreferredform/preferredforms.list")
-public class PreferredFormFormController {
+public class PreferredFormAttributeTypesController {
 
     private final Log log = LogFactory.getLog(getClass());
 

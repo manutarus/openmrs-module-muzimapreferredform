@@ -13,9 +13,7 @@
  */
 package org.openmrs.module.muzimaform;
 
-import org.openmrs.BaseOpenmrsData;
 import org.openmrs.BaseOpenmrsMetadata;
-import org.openmrs.BaseOpenmrsObject;
 
 import java.io.Serializable;
 

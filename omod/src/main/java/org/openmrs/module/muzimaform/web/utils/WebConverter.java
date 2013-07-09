@@ -14,6 +14,9 @@
 package org.openmrs.module.muzimaform.web.utils;
 
 import org.openmrs.module.muzimaform.PreferredForm;
+import org.openmrs.module.muzimaform.PreferredFormAttribute;
+import org.openmrs.module.muzimaform.PreferredFormAttributeType;
+import org.openmrs.module.muzimaform.PreferredFormTag;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +30,30 @@ public class WebConverter {
         Map<String, Object> converted = new HashMap<String, Object>();
         if (preferredForm != null) {
             converted.put("uuid", preferredForm.getUuid());
+        }
+        return converted;
+    }
+
+    public static Map<String, Object> convert(final PreferredFormAttribute preferredFormAttribute) {
+        Map<String, Object> converted = new HashMap<String, Object>();
+        if (preferredFormAttribute != null) {
+            converted.put("uuid", preferredFormAttribute.getUuid());
+        }
+        return converted;
+    }
+
+    public static Map<String, Object> convert(final PreferredFormAttributeType preferredFormAttributeType) {
+        Map<String, Object> converted = new HashMap<String, Object>();
+        if (preferredFormAttributeType != null) {
+            converted.put("uuid", preferredFormAttributeType.getUuid());
+        }
+        return converted;
+    }
+
+    public static Map<String, Object> convert(final PreferredFormTag preferredFormTag) {
+        Map<String, Object> converted = new HashMap<String, Object>();
+        if (preferredFormTag != null) {
+            converted.put("uuid", preferredFormTag.getUuid());
         }
         return converted;
     }
