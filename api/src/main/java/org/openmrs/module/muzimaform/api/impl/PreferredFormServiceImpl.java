@@ -13,9 +13,9 @@
  */
 package org.openmrs.module.muzimaform.api.impl;
 
-import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.muzimaform.api.PreferredFormService;
 import org.openmrs.module.muzimaform.api.db.PreferredFormDAO;
 
@@ -23,22 +23,22 @@ import org.openmrs.module.muzimaform.api.db.PreferredFormDAO;
  * It is a default implementation of {@link PreferredFormService}.
  */
 public class PreferredFormServiceImpl extends BaseOpenmrsService implements PreferredFormService {
-	
-	protected final Log log = LogFactory.getLog(this.getClass());
-	
-	private PreferredFormDAO dao;
-	
-	/**
+
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    private PreferredFormDAO dao;
+
+    /**
      * @param dao the dao to set
      */
     public void setDao(PreferredFormDAO dao) {
-	    this.dao = dao;
+        this.dao = dao;
     }
-    
+
     /**
      * @return the dao
      */
     public PreferredFormDAO getDao() {
-	    return dao;
+        return dao;
     }
 }

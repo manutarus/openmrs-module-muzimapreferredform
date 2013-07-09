@@ -13,36 +13,50 @@
  */
 package org.openmrs.module.muzimaform;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-
 import org.openmrs.BaseCustomizableData;
-import org.openmrs.BaseOpenmrsObject;
 import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.BaseOpenmrsObject;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
+
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
  */
 public class PreferredForm extends BaseCustomizableData<PreferredFormAttribute> implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private Integer id;
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
 
     private CohortDefinition definition;
 
     private Set<PreferredFormTag> tags;
-	
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public CohortDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(final CohortDefinition definition) {
+        this.definition = definition;
+    }
+
+    public Set<PreferredFormTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(final Set<PreferredFormTag> tags) {
+        this.tags = tags;
+    }
 }

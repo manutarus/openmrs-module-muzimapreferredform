@@ -15,9 +15,7 @@ package org.openmrs.module.muzimaform.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.api.context.Context;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,8 +37,8 @@ public class PreferredFormFormController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Map<String, Object> view(final @RequestParam(value = "search") String search,
-                     final @RequestParam(value = "pageNumber") Integer pageNumber,
-                     final @RequestParam(value = "pageSize") Integer pageSize) {
+                                    final @RequestParam(value = "pageNumber") Integer pageNumber,
+                                    final @RequestParam(value = "pageSize") Integer pageSize) {
 
         Map<String, Object> response = new HashMap<String, Object>();
         response.put("pages", 0);

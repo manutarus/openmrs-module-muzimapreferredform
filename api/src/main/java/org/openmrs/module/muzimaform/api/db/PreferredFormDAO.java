@@ -16,10 +16,10 @@ package org.openmrs.module.muzimaform.api.db;
 import org.openmrs.module.muzimaform.api.PreferredFormService;
 
 /**
- *  Database methods for {@link PreferredFormService}.
+ * Database methods for {@link PreferredFormService}.
  */
 public interface PreferredFormDAO {
-	
+
 	/*
 	 * Add DAO methods here
 	 */

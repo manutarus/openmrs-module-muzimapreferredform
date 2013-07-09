@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.muzimaform;
 
+import org.openmrs.BaseOpenmrsData;
 import org.openmrs.BaseOpenmrsObject;
 
 import java.io.Serializable;
@@ -20,22 +21,29 @@ import java.io.Serializable;
 /**
  * It is a model class. It should extend either {@link org.openmrs.BaseOpenmrsObject} or {@link org.openmrs.BaseOpenmrsMetadata}.
  */
-public class PreferredFormTag extends BaseOpenmrsObject implements Serializable {
+public class PreferredFormTag extends BaseOpenmrsData implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private Integer id;
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
 
     private String tag;
-	
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(final String tag) {
+        this.tag = tag;
+    }
 }

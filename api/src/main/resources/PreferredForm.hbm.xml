@@ -1,16 +1,42 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="org.openmrs.module.muzimaform">
 
-	<class name="PreferredForm" table="${project.parent.artifactId}_preferred_form">
-		<id name="id" type="int" column="id" unsaved-value="0">
-			<generator class="native" />
-		</id>
-		<discriminator column="id" insert="false" />
-		<property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
-	</class>
+    <class name="PreferredForm" table="${project.parent.artifactId}_preferred_form">
+        <id name="id" type="int" column="id" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        <discriminator column="id" insert="false"/>
+
+        <set name="tags" table="${project.parent.artifactId}_preferred_form_tag" lazy="true" cascade="none">
+            <key column="id"/>
+            <many-to-many class="org.openmrs.module.muzimaform.PreferredFormTag">
+                <column name="id"/>
+            </many-to-many>
+        </set>
+
+        <many-to-one name="creator" class="org.openmrs.User" not-null="true" column="creator"/>
+
+        <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true" length="19"/>
+
+        <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by"/>
+
+        <property name="dateChanged" type="java.util.Date" column="date_changed" length="19"/>
+
+        <property name="voided" type="boolean" not-null="true" />
+
+        <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />
+
+        <property name="dateVoided" type="java.util.Date"
+                  column="date_voided" length="19" />
+
+        <property name="voidReason" type="java.lang.String"
+                  column="void_reason" length="255" />
+
+        <property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true"/>
+    </class>
 
 </hibernate-mapping>

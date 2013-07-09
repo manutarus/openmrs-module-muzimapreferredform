@@ -13,18 +13,19 @@
  */
 package org.openmrs.module.muzimaform.api;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Tests {@link ${PreferredFormService}}.
  */
-public class  PreferredFormServiceTest extends BaseModuleContextSensitiveTest {
-	
-	@Test
-	public void shouldSetupContext() {
-		assertNotNull(Context.getService(PreferredFormService.class));
-	}
+public class PreferredFormServiceTest extends BaseModuleContextSensitiveTest {
+
+    @Test
+    public void shouldSetupContext() {
+        assertNotNull(Context.getService(PreferredFormService.class));
+    }
 }
