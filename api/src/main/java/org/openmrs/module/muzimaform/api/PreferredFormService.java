@@ -14,6 +14,7 @@
 package org.openmrs.module.muzimaform.api;
 
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.muzimaform.PreferredForm;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -28,9 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface PreferredFormService extends OpenmrsService {
-     
-	/*
-     * Add service methods here
-	 * 
-	 */
+
+    PreferredForm getPreferredFormByUuid(final String uuid);
 }

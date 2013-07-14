@@ -16,6 +16,7 @@ package org.openmrs.module.muzimaform.api.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.module.muzimaform.PreferredForm;
 import org.openmrs.module.muzimaform.api.PreferredFormService;
 import org.openmrs.module.muzimaform.api.db.PreferredFormDAO;
 
@@ -40,5 +41,10 @@ public class PreferredFormServiceImpl extends BaseOpenmrsService implements Pref
      */
     public PreferredFormDAO getDao() {
         return dao;
+    }
+
+    @Override
+    public PreferredForm getPreferredFormByUuid(final String uuid) {
+        return null;
     }
 }

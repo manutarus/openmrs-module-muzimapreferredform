@@ -35,6 +35,8 @@
 
     <properties>
         <openMRSVersion>1.9.3</openMRSVersion>
+        <reportingVersion>0.7.5</reportingVersion>
+        <webservicesRestVersion>2.1</webservicesRestVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -54,7 +56,15 @@
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>reporting-api</artifactId>
-                <version>0.7.5</version>
+                <version>${reportingVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>webservices.rest-omod</artifactId>
+                <version>${webservicesRestVersion}</version>
+                <type>jar</type>
                 <scope>provided</scope>
             </dependency>
             <!-- End OpenMRS modules -->
