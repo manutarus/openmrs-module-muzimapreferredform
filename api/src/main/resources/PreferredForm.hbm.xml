@@ -11,6 +11,9 @@
         </id>
         <discriminator column="id" insert="false"/>
 
+        <property name="definition" type="org.openmrs.module.muzimaform.api.db.hibernate.type.CohortDefinitionType"
+                  column="definition" not-null="true"/>
+
         <set name="tags" table="${project.parent.artifactId}_preferred_form_tag" lazy="true" cascade="none">
             <key column="id"/>
             <many-to-many class="org.openmrs.module.muzimaform.PreferredFormTag">
