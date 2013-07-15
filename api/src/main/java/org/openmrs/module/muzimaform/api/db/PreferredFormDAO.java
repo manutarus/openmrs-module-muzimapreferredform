@@ -13,14 +13,23 @@
  */
 package org.openmrs.module.muzimaform.api.db;
 
+import org.openmrs.module.muzimaform.PreferredForm;
 import org.openmrs.module.muzimaform.api.PreferredFormService;
+
+import java.util.List;
 
 /**
  * Database methods for {@link PreferredFormService}.
  */
 public interface PreferredFormDAO {
 
-	/*
-	 * Add DAO methods here
-	 */
+    PreferredForm savePreferredForm(final PreferredForm preferredForm);
+
+    PreferredForm getPreferredForm(final Integer id);
+
+    PreferredForm getPreferredFormByUuid(final String uuid);
+
+    List<PreferredForm> getAllPreferredForm();
+
+    List<PreferredForm> getPreferredFormByTag(final String tag);
 }

@@ -20,6 +20,8 @@ import org.openmrs.module.muzimaform.PreferredForm;
 import org.openmrs.module.muzimaform.api.PreferredFormService;
 import org.openmrs.module.muzimaform.api.db.PreferredFormDAO;
 
+import java.util.List;
+
 /**
  * It is a default implementation of {@link PreferredFormService}.
  */
@@ -44,7 +46,27 @@ public class PreferredFormServiceImpl extends BaseOpenmrsService implements Pref
     }
 
     @Override
+    public PreferredForm savePreferredForm(final PreferredForm preferredForm) {
+        return dao.savePreferredForm(preferredForm);
+    }
+
+    @Override
+    public PreferredForm getPreferredForm(final Integer id) {
+        return dao.getPreferredForm(id);
+    }
+
+    @Override
     public PreferredForm getPreferredFormByUuid(final String uuid) {
-        return null;
+        return dao.getPreferredFormByUuid(uuid);
+    }
+
+    @Override
+    public List<PreferredForm> getAllPreferredForm() {
+        return dao.getAllPreferredForm();
+    }
+
+    @Override
+    public List<PreferredForm> getPreferredFormByTag(final String tag) {
+        return dao.getPreferredFormByTag(tag);
     }
 }

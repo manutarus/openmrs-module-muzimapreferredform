@@ -17,6 +17,8 @@ import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.muzimaform.PreferredForm;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
  * <p/>
@@ -30,5 +32,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface PreferredFormService extends OpenmrsService {
 
+    PreferredForm savePreferredForm(final PreferredForm preferredForm);
+
+    PreferredForm getPreferredForm(final Integer id);
+
     PreferredForm getPreferredFormByUuid(final String uuid);
+
+    List<PreferredForm> getAllPreferredForm();
+
+    List<PreferredForm> getPreferredFormByTag(final String tag);
 }

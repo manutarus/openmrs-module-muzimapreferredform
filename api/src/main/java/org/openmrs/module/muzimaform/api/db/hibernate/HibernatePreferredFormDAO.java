@@ -15,8 +15,13 @@ package org.openmrs.module.muzimaform.api.db.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.openmrs.module.muzimaform.PreferredForm;
 import org.openmrs.module.muzimaform.api.db.PreferredFormDAO;
+
+import java.util.List;
 
 /**
  * It is a default implementation of  {@link PreferredFormDAO}.
@@ -38,5 +43,42 @@ public class HibernatePreferredFormDAO implements PreferredFormDAO {
      */
     public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    @Override
+    public PreferredForm savePreferredForm(final PreferredForm preferredForm) {
+        getSessionFactory().getCurrentSession().saveOrUpdate(preferredForm);
+        return preferredForm;
+    }
+
+    @Override
+    public PreferredForm getPreferredForm(final Integer id) {
+        return (PreferredForm) getSessionFactory().getCurrentSession().get(PreferredForm.class, id);
+    }
+
+    @Override
+    public PreferredForm getPreferredFormByUuid(final String uuid) {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
+        criteria.add(Restrictions.eq("uuid", uuid));
+        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        return (PreferredForm) criteria.uniqueResult();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<PreferredForm> getAllPreferredForm() {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
+        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        return criteria.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<PreferredForm> getPreferredFormByTag(final String tag) {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
+        criteria.createAlias("tags", "tag");
+        criteria.add(Restrictions.eq("tag.tag", tag));
+        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        return criteria.list();
     }
 }
