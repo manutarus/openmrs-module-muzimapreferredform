@@ -1,0 +1,38 @@
+<div id="wide-sidebar" class="row-fluid">
+    <div class="span2">
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="navigation-active"><a href="#/attributes">Attributes</a></li>
+            <li><a href="#/attributeTypes">Attribute Types</a></li>
+            <li><a href="#/preferredForms">Preferred Forms</a></li>
+        </ul>
+    </div>
+    <div class="span8">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Attribute Name</td>
+                <td>{{attribute.name}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Attribute Value</td>
+                <td>{{error.discriminator}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Attribute Owner</td>
+                <td>{{error.owner}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="submit" ng-click="cancel()" class="btn">Close</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

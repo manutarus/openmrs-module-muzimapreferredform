@@ -1,0 +1,57 @@
+<div id="wide-sidebar" class="row-fluid">
+    <div class="span2">
+        <ul class="nav nav-tabs nav-stacked">
+            <li><a href="#/attributes">Attributes</a></li>
+            <li><a href="#/attributeTypes">Attribute Types</a></li>
+            <li class="navigation-active"><a href="#/preferredForms">Preferred Forms</a></li>
+        </ul>
+    </div>
+    <div class="span8">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{preferredForm.name}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{preferredForm.description}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Cohort Definition</td>
+                <td>{{preferredForm.cohortDefinition}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">Attributes</td>
+            </tr>
+            <tr ng-repeat="attribute in preferredForm.attributes | orderBy:'submitted':true">
+                <td>{{attribute.name}}</td>
+                <td>{{attribute.value}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">Tags</td>
+            </tr>
+            <tr>
+                <td>{{preferredForm.tags}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="submit" ng-click="delete()" class="btn">Delete</button>
+                    <button type="submit" ng-click="cancel()" class="btn">Cancel</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

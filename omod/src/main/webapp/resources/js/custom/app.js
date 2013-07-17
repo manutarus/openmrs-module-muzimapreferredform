@@ -1,83 +1,84 @@
-var muzimaform = angular.module('muzimaform', ['ui.bootstrap', 'filters']);
+var muzimaPreferredForm = angular.module('muzimaPreferredForm', ['ui.bootstrap', 'filters']);
 
-muzimaform.
+muzimaPreferredForm.
     config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
         $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file):/);
-        $routeProvider.when('/queue/:uuid', {controller: QueueCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/queue.html'});
-        $routeProvider.when('/queues', {controller: QueuesCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/queues.html'});
-        $routeProvider.when('/error/:uuid', {controller: ErrorCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/error.html'});
-        $routeProvider.when('/errors', {controller: ErrorsCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/errors.html'});
-        $routeProvider.when('/source/:uuid', {controller: SourceCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/source.html'});
-        $routeProvider.when('/createSource/', {controller: SourceCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/source.html'});
-        $routeProvider.when('/sources', {controller: SourcesCtrl,
-            templateUrl: '../../moduleResources/muzimaform/partials/sources.html'});
-        $routeProvider.otherwise({redirectTo: '/sources'});
+        $routeProvider.when('/attribute/:uuid', {controller: AttributeCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/attribute.html'});
+        $routeProvider.when('/attributes', {controller: AttributesCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/attributes.html'});
+        $routeProvider.when('/attributeType/:uuid', {controller: AttributeTypeCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/attributeType.html'});
+        $routeProvider.when('/attributeTypes', {controller: AttributeTypesCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/attributeTypes.html'});
+        $routeProvider.when('/preferredForm/:uuid', {controller: PreferredFormCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/preferredForm.html'});
+        $routeProvider.when('/preferredForms', {controller: PreferredFormsCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/preferredForms.html'});
+        $routeProvider.otherwise({redirectTo: '/preferredForms'});
     }]);
 
-muzimaform.factory('$data', function ($http) {
-    var getQueues = function (search, pageNumber, pageSize) {
+muzimaPreferredForm.factory('$preferredFormService', function ($http) {
+    var getPreferredForms = function (search, pageNumber, pageSize) {
         if (search === undefined) {
             // replace undefined search term with empty string
             search = '';
         }
-        return $http.get("queues.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
-    };
-    var getQueue = function (uuid) {
-        return $http.get("queue.json?uuid=" + uuid);
-    };
-    var deleteQueue = function (uuidList) {
-        return $http.post("queue.json", {"uuidList": uuidList});
+        return $http.get("preferredForms.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
     };
 
-    var getErrors = function (search, pageNumber, pageSize) {
-        if (search === undefined) {
-            // replace undefined search term with empty string
-            search = '';
-        }
-        return $http.get("errors.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
-    };
-    var getError = function (uuid) {
-        return $http.get("error.json?uuid=" + uuid);
-    };
-    var reQueue = function (uuidList) {
-        return $http.post("error.json", {"uuidList": uuidList});
+    var deletePreferredForms = function(uuidList) {
+        return $http.post("preferredForms.json", {"uuidList": uuidList});
     };
 
-    var getSources = function (search, pageNumber, pageSize) {
+    var getPreferredForm = function (uuid) {
+        return $http.get("preferredForm.json?uuid=" + uuid);
+    };
+
+    var deletePreferredForm = function (uuid) {
+        return $http.post("preferredForm.json", {"uuid": uuid});
+    };
+
+    var savePreferredForm = function(uuid, properties) {
+        return $http.post("preferredForm.json", {"uuid": uuid, "properties": properties});
+    };
+
+    var getAttributeTypes = function (search, pageNumber, pageSize) {
         if (search === undefined) {
             // replace undefined search term with empty string
             search = '';
         }
-        return $http.get("sources.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
+        return $http.get("attributeTypes.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
     };
-    var getSource = function (uuid) {
-        return $http.get("source.json?uuid=" + uuid);
+
+    var getAttributeType = function (uuid) {
+        return $http.get("attributeType.json?uuid=" + uuid);
     };
-    var saveSource = function (uuid, name, description) {
-        return $http.post("source.json", {"uuid": uuid, "name": name, "description": description});
+
+    var getAttributes = function (search, pageNumber, pageSize) {
+        if (search === undefined) {
+            // replace undefined search term with empty string
+            search = '';
+        }
+        return $http.get("attributes.json?search=" + search + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize);
     };
-    var deleteSource = function (uuid) {
-        return $http.post("source.json", {"uuid": uuid});
+
+    var getAttribute = function (uuid) {
+        return $http.get("attribute.json?uuid=" + uuid);
     };
+
     return {
-        getQueues: getQueues,
-        getQueue: getQueue,
-        deleteQueue: deleteQueue,
+        getPreferredForms: getPreferredForms,
+        deletePreferredForms: deletePreferredForms,
+        getPreferredForm: getPreferredForm,
+        deletePreferredForm:deletePreferredForm,
+        savePreferredForm: savePreferredForm,
 
-        getErrors: getErrors,
-        getError: getError,
-        reQueue: reQueue,
+        getAttributeTypes: getAttributeTypes,
+        getAttributeType: getAttributeType,
 
-        getSources: getSources,
-        getSource: getSource,
-        saveSource: saveSource,
-        deleteSource: deleteSource
+        getAttributes: getAttributes,
+        getAttribute: getAttribute
     }
 });
 
