@@ -26,6 +26,8 @@ public class PreferredFormTag extends BaseOpenmrsMetadata implements Serializabl
 
     private Integer id;
 
+    private PreferredForm preferredForm;
+
     @Override
     public Integer getId() {
         return id;
@@ -42,5 +44,13 @@ public class PreferredFormTag extends BaseOpenmrsMetadata implements Serializabl
 
     public void setTag(final String tag) {
         this.setName(tag);
+    }
+
+    public PreferredForm getPreferredForm() {
+        return preferredForm;
+    }
+
+    public void setPreferredForm(final PreferredForm preferredForm) {
+        this.preferredForm = preferredForm;
     }
 }

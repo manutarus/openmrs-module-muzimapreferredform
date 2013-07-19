@@ -17,7 +17,8 @@
 
     <!-- Required Modules -->
     <require_modules>
-        <require_module version="0.7.0">org.openmrs.module.reporting-api</require_module>
+        <require_module version="0.7.0">org.openmrs.module.reporting</require_module>
+        <require_module version="1.0.0">org.openmrs.module.muzima</require_module>
     </require_modules>
     <!-- / Required Modules -->
 
@@ -33,6 +34,9 @@
     <!-- Maps hibernate file's, if present -->
     <mappingFiles>
         PreferredForm.hbm.xml
+        PreferredFormAttribute.hbm.xml
+        PreferredFormAttributeType.hbm.xml
+        PreferredFormTag.hbm.xml
     </mappingFiles>
 
     <!-- Internationalization -->

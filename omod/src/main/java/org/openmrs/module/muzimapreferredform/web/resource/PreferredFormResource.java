@@ -14,9 +14,9 @@
 package org.openmrs.module.muzimapreferredform.web.resource;
 
 import org.openmrs.api.context.Context;
+import org.openmrs.module.muzima.web.controller.MuzimaRestController;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
 import org.openmrs.module.muzimapreferredform.api.PreferredFormService;
-import org.openmrs.module.muzimapreferredform.web.controller.MuzimaRestController;
 import org.openmrs.module.webservices.rest.SimpleObject;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;

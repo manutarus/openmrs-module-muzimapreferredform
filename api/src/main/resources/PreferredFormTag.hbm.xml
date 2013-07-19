@@ -15,6 +15,10 @@
 
         <property name="description" type="java.lang.String" length="255" />
 
+        <many-to-one name="preferredForm" class="PreferredForm">
+            <column name="preferred_form_id" />
+        </many-to-one>
+
         <many-to-one name="creator" class="org.openmrs.User" not-null="true" column="creator"/>
 
         <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true" length="19"/>

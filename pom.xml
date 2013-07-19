@@ -36,6 +36,7 @@
     <properties>
         <openMRSVersion>1.9.3</openMRSVersion>
         <reportingVersion>0.7.5</reportingVersion>
+        <muzimaVersion>1.0.0</muzimaVersion>
         <webservicesRestVersion>2.1</webservicesRestVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -59,7 +60,12 @@
                 <version>${reportingVersion}</version>
                 <scope>provided</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>muzima-omod</artifactId>
+                <version>${muzimaVersion}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>webservices.rest-omod</artifactId>
