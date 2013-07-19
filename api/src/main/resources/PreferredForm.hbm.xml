@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="org.openmrs.module.muzimapreferredform">
 
-    <class name="PreferredForm" table="${project.parent.artifactId}">
+    <class name="PreferredForm" table="${project.parent.artifactId}_preferred_form">
         <id name="id" type="int" column="id" unsaved-value="0">
             <generator class="native"/>
         </id>
@@ -14,11 +14,9 @@
         <property name="definition" type="org.openmrs.module.muzimapreferredform.api.db.hibernate.type.CohortDefinitionType"
                   column="definition" not-null="true"/>
 
-        <set name="tags" table="${project.parent.artifactId}_tag" lazy="true" cascade="none">
-            <key column="tag_id"/>
-            <many-to-many class="org.openmrs.module.muzimapreferredform.PreferredFormTag">
-                <column name="id"/>
-            </many-to-many>
+        <set name="tags" table="${project.parent.artifactId}_tag" lazy="true" cascade="delete">
+            <key column="preferred_form_id"/>
+            <one-to-many class="PreferredFormTag" />
         </set>
 
         <many-to-one name="creator" class="org.openmrs.User" not-null="true" column="creator"/>

@@ -11,7 +11,7 @@
         </id>
         <discriminator column="id" insert="false"/>
 
-        <many-to-one name="owner" class="PreferredForm" not-null="true" column="location_id"/>
+        <many-to-one name="owner" class="PreferredForm" not-null="true" column="preferred_form_id"/>
 
         <many-to-one name="attributeType" class="PreferredFormAttributeType" not-null="true"
                      column="attribute_type_id"/>

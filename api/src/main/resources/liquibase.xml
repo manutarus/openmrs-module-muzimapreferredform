@@ -9,4 +9,171 @@
         for a list of supported elements and attributes
     -->
 
+    <changeSet id="muzima-2013-07-19-11-25" author="nribeka">
+        <createTable tableName="muzimapreferredform_preferred_form">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="definition" type="varchar(38)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="creator" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime" defaultValueDate="0002-11-30T00:00:00.0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="retired" type="tinyint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="int"/>
+            <column name="date_retired" type="datetime"/>
+
+            <column name="uuid" type="varchar(38)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_preferred_form_creator"
+                                 baseTableName="muzimapreferredform_preferred_form" baseColumnNames="creator"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_preferred_form_retired_by"
+                                 baseTableName="muzimapreferredform_preferred_form" baseColumnNames="retired_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addAutoIncrement tableName="muzimapreferredform_preferred_form" columnName="id" columnDataType="int"/>
+    </changeSet>
+
+    <changeSet id="muzima-2013-07-19-11-26" author="nribeka">
+        <createTable tableName="muzimapreferredform_attribute_type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1024)"/>
+            <column name="datatype" type="varchar(255)"/>
+            <column name="datatype_config" type="text"/>
+            <column name="preferred_handler" type="varchar(255)"/>
+            <column name="handler_config" type="text"/>
+            <column name="min_occurs" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_occurs" type="int"/>
+            <column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="retired" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="int"/>
+            <column name="date_retired" type="datetime"/>
+            <column name="retire_reason" type="varchar(255)" defaultValue="null"/>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_type_creator"
+                                 baseTableName="muzimapreferredform_attribute_type" baseColumnNames="creator"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_type_changed_by"
+                                 baseTableName="muzimapreferredform_attribute_type" baseColumnNames="changed_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_type_retired_by"
+                                 baseTableName="muzimapreferredform_attribute_type" baseColumnNames="retired_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addAutoIncrement tableName="muzimapreferredform_attribute_type" columnName="id" columnDataType="int"/>
+    </changeSet>
+
+    <changeSet id="muzima-2013-07-19-11-27" author="nribeka">
+        <createTable tableName="muzimapreferredform_attribute">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="preferred_form_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="attribute_type_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_reference" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="int"/>
+            <column name="date_voided" type="datetime"/>
+            <column name="void_reason" type="varchar(255)" defaultValue="null"/>
+        </createTable>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_muzimapreferredform_preferred_form"
+                                 baseTableName="muzimapreferredform_attribute" baseColumnNames="preferred_form_id"
+                                 referencedTableName="muzimapreferredform_preferred_form" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_type_id"
+                                 baseTableName="muzimapreferredform_attribute" baseColumnNames="attribute_type_id"
+                                 referencedTableName="muzimapreferredform_attribute_type" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_creator"
+                                 baseTableName="muzimapreferredform_attribute" baseColumnNames="creator"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_changed_by"
+                                 baseTableName="muzimapreferredform_attribute" baseColumnNames="changed_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_attribute_voided_by"
+                                 baseTableName="muzimapreferredform_attribute" baseColumnNames="voided_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addAutoIncrement tableName="muzimapreferredform_attribute" columnName="id" columnDataType="int"/>
+    </changeSet>
+
+    <changeSet id="muzima-2013-07-19-11-28" author="nribeka">
+        <createTable tableName="muzimapreferredform_tag">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="preferred_form_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="creator" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime" defaultValueDate="0002-11-30T00:00:00.0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="uuid" type="varchar(38)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_tag_creator"
+                                 baseTableName="muzimapreferredform_tag" baseColumnNames="creator"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="muzimapreferredform_tag_muzimapreferredform_preferred_form"
+                                 baseTableName="muzimapreferredform_tag" baseColumnNames="preferred_form_id"
+                                 referencedTableName="muzimapreferredform_preferred_form" referencedColumnNames="id"/>
+        <addAutoIncrement tableName="muzimapreferredform_tag" columnName="id" columnDataType="int"/>
+    </changeSet>
+
 </databaseChangeLog>
