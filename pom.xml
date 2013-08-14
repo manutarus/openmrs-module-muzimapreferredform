@@ -62,6 +62,18 @@
             </dependency>
             <dependency>
                 <groupId>org.openmrs.module</groupId>
+                <artifactId>serialization.xstream-api</artifactId>
+                <version>0.2.7</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>calculation-api</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
                 <artifactId>muzima-omod</artifactId>
                 <version>${muzimaVersion}</version>
                 <scope>provided</scope>
