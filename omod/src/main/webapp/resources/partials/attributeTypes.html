@@ -10,7 +10,7 @@
         <div class="clearfix">
             <div class="row">
                 <div class="span4 pull-left">
-                    <a href="#/createSource">Create Source</a>
+                    <a href="#/attributeType">New Attribute Type</a>
                 </div>
                 <div class="span4 pull-right">
                     <input type="text" ng-model="search" class="search-query search-query-size"/>
@@ -27,14 +27,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-hide="sources.length">
+                    <tr ng-hide="attributeTypes.length">
                         <td colspan="4">No data in the database.</td>
                     </tr>
-                    <tr ng-repeat="source in sources | filter:filterSource() | orderBy:'created':true">
-                        <td><a href="#/source/{{source.uuid}}"><i class=icon-edit></i></a></td>
-                        <td>{{source.name}}</td>
-                        <td>{{source.uuid}}</td>
-                        <td>{{source.created}}</td>
+                    <tr ng-repeat="attributeType in attributeTypes | filter:filterSource() | orderBy:'created':true">
+                        <td><a href="#/attributeType/{{attributeType.uuid}}"><i class=icon-edit></i></a></td>
+                        <td>{{attributeType.name}}</td>
+                        <td>{{attributeType.uuid}}</td>
+                        <td>{{attributeType.created}}</td>
                     </tr>
                     </tbody>
                 </table>

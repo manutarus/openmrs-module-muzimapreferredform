@@ -142,6 +142,20 @@ function AttributeTypeCtrl($scope, $routeParams, $location, $preferredFormServic
         $scope.mode = "edit";
     };
 
+    $scope.save = function(attribute) {
+        $preferredFormService.saveAttributeType(attribute.uuid, attribute.name, attribute.description).
+            then(function() {
+                $location.path("/attributeTypes");
+            })
+    };
+
+    $scope.delete = function(attribute) {
+        $preferredFormService.deleteAttributeType(attribute.uuid).
+            then(function() {
+                $location.path("/attributeTypes");
+            })
+    };
+
     $scope.cancel = function () {
         if ($scope.mode == "edit") {
             if ($scope.uuid === undefined) {

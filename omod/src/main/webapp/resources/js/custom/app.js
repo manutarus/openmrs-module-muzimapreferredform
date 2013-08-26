@@ -9,6 +9,8 @@ muzimaPreferredForm.
             templateUrl: '../../moduleResources/muzimapreferredform/partials/attributes.html'});
         $routeProvider.when('/attributeType/:uuid', {controller: AttributeTypeCtrl,
             templateUrl: '../../moduleResources/muzimapreferredform/partials/attributeType.html'});
+        $routeProvider.when('/attributeType/', {controller: AttributeTypeCtrl,
+            templateUrl: '../../moduleResources/muzimapreferredform/partials/attributeType.html'});
         $routeProvider.when('/attributeTypes', {controller: AttributeTypesCtrl,
             templateUrl: '../../moduleResources/muzimapreferredform/partials/attributeTypes.html'});
         $routeProvider.when('/preferredForm/:uuid', {controller: PreferredFormCtrl,
@@ -55,6 +57,14 @@ muzimaPreferredForm.factory('$preferredFormService', function ($http) {
         return $http.get("attributeType.json?uuid=" + uuid);
     };
 
+    var saveAttributeType = function (uuid, name, description) {
+        return $http.post("attributeType.json", {"uuid": uuid, "name": name, "description": description});
+    };
+
+    var deleteAttributeType = function (uuid) {
+        return $http.post("attributeType.json", {"uuid": uuid});
+    };
+
     var getAttributes = function (search, pageNumber, pageSize) {
         if (search === undefined) {
             // replace undefined search term with empty string
@@ -76,9 +86,10 @@ muzimaPreferredForm.factory('$preferredFormService', function ($http) {
 
         getAttributeTypes: getAttributeTypes,
         getAttributeType: getAttributeType,
+        saveAttributeType: saveAttributeType,
+        deleteAttributeType: deleteAttributeType,
 
         getAttributes: getAttributes,
         getAttribute: getAttribute
     }
 });
-

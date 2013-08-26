@@ -15,6 +15,7 @@ package org.openmrs.module.muzimapreferredform.api;
 
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
+import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -39,6 +40,8 @@ public interface PreferredFormService extends OpenmrsService {
      */
     PreferredForm savePreferredForm(final PreferredForm preferredForm);
 
+    PreferredFormAttributeType savePreferredFormAttributeType(final PreferredFormAttributeType preferredFormAttributeType);
+
     PreferredForm getPreferredForm(final Integer id);
 
     PreferredForm getPreferredFormByUuid(final String uuid);
@@ -46,4 +49,10 @@ public interface PreferredFormService extends OpenmrsService {
     List<PreferredForm> getAllPreferredForm();
 
     List<PreferredForm> getPreferredFormByTag(final String tag);
+
+    PreferredFormAttributeType getPreferredFormAttributeTypeByUuid(final String uuid);
+
+    List<PreferredFormAttributeType> getAllPreferredFormAttributeTypes(final String search, final Integer pageNumber, final Integer pageSize);
+
+    Number countFormAttributes();
 }

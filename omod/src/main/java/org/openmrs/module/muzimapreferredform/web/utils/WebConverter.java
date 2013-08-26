@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.muzimapreferredform.web.utils;
 
+import org.openmrs.api.context.Context;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
 import org.openmrs.module.muzimapreferredform.PreferredFormAttribute;
 import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
@@ -45,7 +46,10 @@ public class WebConverter {
     public static Map<String, Object> convert(final PreferredFormAttributeType preferredFormAttributeType) {
         Map<String, Object> converted = new HashMap<String, Object>();
         if (preferredFormAttributeType != null) {
+            converted.put("name",preferredFormAttributeType.getName());
             converted.put("uuid", preferredFormAttributeType.getUuid());
+            converted.put("description", preferredFormAttributeType.getDescription());
+            converted.put("created", Context.getDateFormat().format(preferredFormAttributeType.getDateCreated()));
         }
         return converted;
     }

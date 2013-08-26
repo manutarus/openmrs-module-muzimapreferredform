@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
+import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
 import org.openmrs.module.muzimapreferredform.api.PreferredFormService;
 import org.openmrs.module.muzimapreferredform.api.db.PreferredFormDAO;
 
@@ -51,6 +52,11 @@ public class PreferredFormServiceImpl extends BaseOpenmrsService implements Pref
     }
 
     @Override
+    public PreferredFormAttributeType savePreferredFormAttributeType(final PreferredFormAttributeType preferredFormAttributeType){
+        return dao.savePreferredFormAttributeType(preferredFormAttributeType);
+    }
+
+    @Override
     public PreferredForm getPreferredForm(final Integer id) {
         return dao.getPreferredForm(id);
     }
@@ -68,5 +74,17 @@ public class PreferredFormServiceImpl extends BaseOpenmrsService implements Pref
     @Override
     public List<PreferredForm> getPreferredFormByTag(final String tag) {
         return dao.getPreferredFormByTag(tag);
+    }
+    @Override
+    public PreferredFormAttributeType getPreferredFormAttributeTypeByUuid(final String uuid){
+        return dao.getPreferredFormAttributeTypeByUuid(uuid);
+    }
+    @Override
+    public List<PreferredFormAttributeType> getAllPreferredFormAttributeTypes(final String search, final Integer pageNumber, final Integer pageSize){
+        return dao.getAllPreferredFormAttributeTypes(search,pageNumber,pageSize);
+    }
+    @Override
+    public Number countFormAttributes() {
+        return dao.countFormAttributes();
     }
 }

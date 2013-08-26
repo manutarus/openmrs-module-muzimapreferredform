@@ -10,20 +10,21 @@
         <div ng-switch="mode">
             <div ng-switch-when="view">
                 <div class="row">
-                    <input class="span10" placeholder="Source description ..." type="text"
-                           disabled="" ng-model="source.name">
+                    <input class="span10" placeholder="Attribute type name ..." type="text"
+                           disabled="" ng-model="attributeType.name">
                 </div>
                 <div class="row">
-                    <textarea class="span12" placeholder="Source description ..." rows="10"
-                              disabled="" ng-model="source.description">
+                    <textarea class="span12" placeholder="Attribute type description ..." rows="10"
+                              disabled="" ng-model="attributeType.description">
                     </textarea>
                 </div>
                 <div class="row">
-                    <input class="span10" placeholder="Source description ..." type="text"
-                           disabled="" ng-model="source.uuid">
+                    <input class="span10" placeholder="Attribute type uuid ..." type="text"
+                           disabled="" ng-model="attributeType.uuid">
                 </div>
                 <div class="row">
                     <button type="submit" ng-click="edit()" class="btn">Edit</button>
+                    <button type="submit" ng-click="delete(attributeType)" class="btn">Delete</button>
                     <button type="submit" ng-click="cancel()" class="btn">Close</button>
                 </div>
                 <span></span>
@@ -31,21 +32,20 @@
             <div ng-switch-when="edit">
                 <form id="consult">
                     <div class="row">
-                        <input class="span10" placeholder="Source name ..." type="text"
-                               ng-model="source.name">
+                        <input class="span10" placeholder="Attribute type name ..." type="text"
+                               ng-model="attributeType.name">
                     </div>
                     <div class="row">
-                        <textarea class="span12" placeholder="Source description ..." rows="10"
-                                  ng-model="source.description">
+                        <textarea class="span12" placeholder="Attribute type description ..." rows="10"
+                                  ng-model="attributeType.description">
                         </textarea>
                     </div>
                     <div class="row">
-                        <input class="span10" placeholder="Source uuid ..." type="text"
-                               disabled="" ng-model="source.uuid">
+                        <input class="span10" placeholder="Attribute type uuid ..." type="text"
+                               disabled="" ng-model="attributeType.uuid">
                     </div>
                     <div class="row">
-                        <button type="submit" ng-click="save(source)" class="btn">Save</button>
-                        <button ng-show="source.uuid" type="submit" ng-click="delete()" class="btn">Delete</button>
+                        <button type="submit" ng-click="save(attributeType)" class="btn">Save</button>
                         <button type="submit" ng-click="cancel()" class="btn">Cancel</button>
                     </div>
                     <span></span>

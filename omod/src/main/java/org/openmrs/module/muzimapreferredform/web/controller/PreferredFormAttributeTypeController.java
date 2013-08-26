@@ -13,8 +13,13 @@
  */
 package org.openmrs.module.muzimapreferredform.web.controller;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
+import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
+import org.openmrs.module.muzimapreferredform.api.PreferredFormService;
+import org.openmrs.module.muzimapreferredform.web.utils.WebConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,17 +36,37 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/module/muzimapreferredform/attributeType.json")
 public class PreferredFormAttributeTypeController {
-
     private final Log log = LogFactory.getLog(getClass());
-
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Map<String, Object> view(final @RequestParam(value = "uuid") String uuid) {
-        Map<String, Object> response = new HashMap<String, Object>();
-        return response;
+        PreferredFormService preferredFormService = Context.getService(PreferredFormService.class);
+        PreferredFormAttributeType attributeTypeData = preferredFormService.getPreferredFormAttributeTypeByUuid(uuid);
+        return WebConverter.convert(attributeTypeData);
     }
-
     @RequestMapping(method = RequestMethod.POST)
-    public void save(final @RequestBody Map<String, Object> request) {
+    public void save(final @RequestBody Map<String, Object> map) {
+        String uuid = (String) map.get("uuid");
+        String name = (String) map.get("name");
+        String description = (String) map.get("description");
+        PreferredFormService preferredFormService = Context.getService(PreferredFormService.class);
+        if (StringUtils.isNotBlank(uuid)) {
+            PreferredFormAttributeType preferredFormAttributeTypeData = preferredFormService.getPreferredFormAttributeTypeByUuid(uuid);
+            if (StringUtils.isNotBlank(name) || StringUtils.isNotBlank(description)) {
+                preferredFormAttributeTypeData.setName(name);
+                preferredFormAttributeTypeData.setDescription(description);
+                System.out.println(preferredFormAttributeTypeData);
+                preferredFormService.savePreferredFormAttributeType(preferredFormAttributeTypeData);
+            } else {
+                preferredFormAttributeTypeData.setRetired(true);
+                preferredFormAttributeTypeData.setRetireReason("form attribute type out of date");
+                preferredFormService.savePreferredFormAttributeType(preferredFormAttributeTypeData);
+            }
+        }else {
+            PreferredFormAttributeType preferredFormAttributeType = new PreferredFormAttributeType();
+            preferredFormAttributeType.setName(name);
+            preferredFormAttributeType.setDescription(description);
+            preferredFormService.savePreferredFormAttributeType(preferredFormAttributeType);
+        }
     }
 }

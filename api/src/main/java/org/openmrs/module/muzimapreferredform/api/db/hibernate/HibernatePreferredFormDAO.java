@@ -17,8 +17,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
+import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
 import org.openmrs.module.muzimapreferredform.api.db.PreferredFormDAO;
 
 import java.util.List;
@@ -52,6 +54,12 @@ public class HibernatePreferredFormDAO implements PreferredFormDAO {
     }
 
     @Override
+    public PreferredFormAttributeType savePreferredFormAttributeType(final PreferredFormAttributeType preferredFormAttributeType){
+        getSessionFactory().getCurrentSession().saveOrUpdate(preferredFormAttributeType);
+        return preferredFormAttributeType;
+    }
+
+    @Override
     public PreferredForm getPreferredForm(final Integer id) {
         return (PreferredForm) getSessionFactory().getCurrentSession().get(PreferredForm.class, id);
     }
@@ -81,4 +89,25 @@ public class HibernatePreferredFormDAO implements PreferredFormDAO {
         criteria.add(Restrictions.eq("voided", Boolean.FALSE));
         return criteria.list();
     }
+    @Override
+    public PreferredFormAttributeType getPreferredFormAttributeTypeByUuid(final String uuid){
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredFormAttributeType.class);
+        criteria.add(Restrictions.eq("uuid", uuid));
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
+        return (PreferredFormAttributeType) criteria.uniqueResult();
+    }
+    @Override
+    public List<PreferredFormAttributeType> getAllPreferredFormAttributeTypes(final String search,final Integer pageNumber, final Integer pageSize){
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredFormAttributeType.class);
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
+        return criteria.list();
+    }
+    @Override
+    public Number countFormAttributes() {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredFormAttributeType.class);
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
+        criteria.setProjection(Projections.rowCount());
+        return (Number) criteria.uniqueResult();
+    }
+
 }
