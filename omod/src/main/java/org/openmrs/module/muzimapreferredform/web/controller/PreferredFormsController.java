@@ -15,14 +15,19 @@ package org.openmrs.module.muzimapreferredform.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.muzimapreferredform.PreferredForm;
+import org.openmrs.module.muzimapreferredform.api.PreferredFormService;
+import org.openmrs.module.muzimapreferredform.web.utils.WebConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.openmrs.api.context.Context;
+import java.beans.beancontext.BeanContextServicesSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,8 +46,16 @@ public class PreferredFormsController {
                                     final @RequestParam(value = "pageSize") Integer pageSize) {
 
         Map<String, Object> response = new HashMap<String, Object>();
-        response.put("pages", 0);
-        response.put("objects", new ArrayList<Object>());
+        PreferredFormService preferredFormService = Context.getService(PreferredFormService.class);
+       int pages = (preferredFormService.countForms().intValue() + pageSize - 1)/ pageSize;
+        List<Object> objects = new ArrayList<Object>();
+        for (PreferredForm preferredFormList : preferredFormService.getAllPreferredForm(search,pageNumber, pageSize)) {
+            objects.add(WebConverter.convert(preferredFormList));
+        }
+
+        response.put("pages", pages);
+        response.put("objects", objects);
         return response;
+
     }
 }

@@ -39,7 +39,7 @@
                         <td>{{preferredForm.name}}</td>
                         <td>{{preferredForm.cohortDefinition}}</td>
                         <td>{{preferredForm.attributeCount}}</td>
-                        <td>{{preferredForm.tags}}</td>
+                        <td ng-repeat="tag in preferredForm.tags">{{tag}}</td>
                     </tr>
                     </tbody>
                 </table>

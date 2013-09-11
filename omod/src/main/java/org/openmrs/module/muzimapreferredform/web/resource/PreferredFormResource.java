@@ -26,6 +26,7 @@ import org.openmrs.module.webservices.rest.web.representation.FullRepresentation
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.impl.DataDelegatingCrudResource;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
+import org.openmrs.module.webservices.rest.web.resource.impl.MetadataDelegatingCrudResource;
 import org.openmrs.module.webservices.rest.web.response.ResourceDoesNotSupportOperationException;
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
 
@@ -34,7 +35,7 @@ import org.openmrs.module.webservices.rest.web.response.ResponseException;
  */
 @Resource(name = RestConstants.VERSION_1 + MuzimaRestController.MUZIMA_NAMESPACE + "/queueData",
         supportedClass = PreferredForm.class, supportedOpenmrsVersions = {"1.8.*", "1.9.*"})
-public class PreferredFormResource extends DataDelegatingCrudResource<PreferredForm> {
+public class PreferredFormResource extends MetadataDelegatingCrudResource<PreferredForm> {
 
     /**
      * Gets the delegate object with the given unique id. Implementations may decide whether
@@ -62,7 +63,7 @@ public class PreferredFormResource extends DataDelegatingCrudResource<PreferredF
      *
      */
     @Override
-    protected void delete(final PreferredForm delegate, final String reason, final RequestContext context) throws ResponseException {
+    public void delete(final PreferredForm delegate, final String reason, final RequestContext context) throws ResponseException {
         throw new ResourceDoesNotSupportOperationException();
     }
 

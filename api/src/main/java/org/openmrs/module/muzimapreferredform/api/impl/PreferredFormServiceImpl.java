@@ -61,12 +61,21 @@ public class PreferredFormServiceImpl extends BaseOpenmrsService implements Pref
     }
 
     @Override
-    public List<PreferredForm> getAllPreferredForm() {
-        return dao.getAllPreferredForm();
+    public List<PreferredForm> getAllPreferredForm(final String search, final Integer pageNumber, final Integer pageSize) {
+        return dao.getAllPreferredForm(search, pageNumber, pageSize);
+    }
+
+    @Override
+    public List<PreferredForm> getPreferredFormTags(final Integer id){
+        return dao.getPreferredFormTags(id);
     }
 
     @Override
     public List<PreferredForm> getPreferredFormByTag(final String tag) {
         return dao.getPreferredFormByTag(tag);
+    }
+    @Override
+    public Number countForms() {
+        return dao.countForms();
     }
 }

@@ -14,6 +14,7 @@
 package org.openmrs.module.muzimapreferredform;
 
 import org.openmrs.BaseCustomizableData;
+import org.openmrs.BaseCustomizableMetadata;
 import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.BaseOpenmrsObject;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
@@ -24,7 +25,7 @@ import java.util.Set;
 /**
  * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
  */
-public class PreferredForm extends BaseCustomizableData<PreferredFormAttribute> implements Serializable {
+public class PreferredForm extends BaseCustomizableMetadata<PreferredFormAttribute> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -13,11 +13,18 @@
  */
 package org.openmrs.module.muzimapreferredform.web.utils;
 
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
 import org.openmrs.module.muzimapreferredform.PreferredFormAttribute;
 import org.openmrs.module.muzimapreferredform.PreferredFormAttributeType;
 import org.openmrs.module.muzimapreferredform.PreferredFormTag;
+import org.openmrs.module.muzimapreferredform.api.PreferredFormService;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,9 +34,21 @@ import java.util.Map;
 public class WebConverter {
 
     public static Map<String, Object> convert(final PreferredForm preferredForm) {
+        PreferredFormService preferredFormService = Context.getService(PreferredFormService.class);
         Map<String, Object> converted = new HashMap<String, Object>();
         if (preferredForm != null) {
+            JSONArray list = new JSONArray();
             converted.put("uuid", preferredForm.getUuid());
+            converted.put("name", preferredForm.getName());
+            converted.put("cohortDefinition", preferredForm.getDefinition());
+            converted.put("attributeCount", preferredForm.getActiveAttributes().size());
+
+            for (PreferredFormTag s : preferredForm.getTags()) {
+                list.add(s.getName());
+            }
+
+            converted.put("tags",list);
+
         }
         return converted;
     }

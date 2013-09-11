@@ -43,7 +43,11 @@ public interface PreferredFormService extends OpenmrsService {
 
     PreferredForm getPreferredFormByUuid(final String uuid);
 
-    List<PreferredForm> getAllPreferredForm();
+    List<PreferredForm> getAllPreferredForm(final String search, final Integer pageNumber, final Integer pageSize);
 
     List<PreferredForm> getPreferredFormByTag(final String tag);
+
+    List<PreferredForm> getPreferredFormTags(final Integer id);
+
+    Number countForms();
 }

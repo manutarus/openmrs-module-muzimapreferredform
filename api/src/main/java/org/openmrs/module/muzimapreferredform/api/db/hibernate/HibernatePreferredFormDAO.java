@@ -17,8 +17,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.muzimapreferredform.PreferredForm;
+import org.openmrs.module.muzimapreferredform.PreferredFormTag;
 import org.openmrs.module.muzimapreferredform.api.db.PreferredFormDAO;
 
 import java.util.List;
@@ -60,15 +62,22 @@ public class HibernatePreferredFormDAO implements PreferredFormDAO {
     public PreferredForm getPreferredFormByUuid(final String uuid) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
         criteria.add(Restrictions.eq("uuid", uuid));
-        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        criteria.add(Restrictions.eq("PreferredForm.retired", Boolean.FALSE));
         return (PreferredForm) criteria.uniqueResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<PreferredForm> getAllPreferredForm() {
+    public List<PreferredForm> getAllPreferredForm(final String search,final Integer pageNumber, final Integer pageSize) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
-        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
+        return criteria.list();
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<PreferredForm>  getPreferredFormTags(final Integer id) {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredFormTag.class);
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
         return criteria.list();
     }
 
@@ -78,7 +87,14 @@ public class HibernatePreferredFormDAO implements PreferredFormDAO {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
         criteria.createAlias("tags", "tag");
         criteria.add(Restrictions.eq("tag.tag", tag));
-        criteria.add(Restrictions.eq("voided", Boolean.FALSE));
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
         return criteria.list();
+    }
+    @Override
+    public Number countForms() {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(PreferredForm.class);
+        criteria.add(Restrictions.eq("retired", Boolean.FALSE));
+        criteria.setProjection(Projections.rowCount());
+        return (Number) criteria.uniqueResult();
     }
 }

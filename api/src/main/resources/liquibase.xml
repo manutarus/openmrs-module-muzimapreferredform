@@ -9,10 +9,14 @@
         for a list of supported elements and attributes
     -->
 
-    <changeSet id="muzima-2013-07-19-11-25" author="nribeka">
+    <changeSet id="muzima-2013-09-05-09-32" author="manutarus">
         <createTable tableName="muzimapreferredform_preferred_form">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
             </column>
 
             <column name="definition" type="varchar(38)">
@@ -31,7 +35,7 @@
             </column>
             <column name="retired_by" type="int"/>
             <column name="date_retired" type="datetime"/>
-
+            <column name="retire_reason" type="varchar(255)" defaultValue="null"/>
             <column name="uuid" type="varchar(38)">
                 <constraints unique="true" nullable="false"/>
             </column>
@@ -142,7 +146,7 @@
         <addAutoIncrement tableName="muzimapreferredform_attribute" columnName="id" columnDataType="int"/>
     </changeSet>
 
-    <changeSet id="muzima-2013-07-19-11-28" author="nribeka">
+    <changeSet id="muzima-2013-09-05-13-50" author="manutarus">
         <createTable tableName="muzimapreferredform_tag">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
@@ -162,6 +166,13 @@
             <column name="date_created" type="datetime" defaultValueDate="0002-11-30T00:00:00.0">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="retired" type="tinyint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="int"/>
+            <column name="date_retired" type="datetime"/>
+            <column name="retire_reason" type="varchar(255)" defaultValue="null"/>
 
             <column name="uuid" type="varchar(38)">
                 <constraints unique="true" nullable="false"/>

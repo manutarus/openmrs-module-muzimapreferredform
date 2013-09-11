@@ -97,6 +97,7 @@ function PreferredFormsCtrl($scope, $location, $preferredFormService) {
             then(function () {
                 $location.path("/preferredForms");
             })
+
     };
 
     $scope.$watch('currentPage', function (newValue, oldValue) {
